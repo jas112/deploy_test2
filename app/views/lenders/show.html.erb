@@ -1,0 +1,67 @@
+<%= content_for :middle do %>
+<h4 style="margin-left:880px;"><a href="/sessions/<%= current_user.id%>" data-method="DELETE">Logout</a></h4>
+<h2>Name: <%= @lender.first_name %> <%= @lender.last_name %></h2>
+<h3>Account Balance: $<%= @lender.account_balance %></h3>
+<h3 style="color:blue;">List of people who are in need of help:</h3>
+<% if flash[:errors] %>
+	<% flash[:errors].each do |e| %>
+		<p><%= e %></p>
+	<% end %>
+<% end %>
+<table>
+  <thead>
+    <tr>
+      <td style="width: 200px;">Name</td>
+      <td style="width: 200px;">Money Needed For</td>
+      <td style="width: 200px;">Description</td>
+      <td style="width: 200px;">Amount Needed</td>
+      <td style="width: 200px;">Amount Raised</td>
+      <td style="width: 200px;">Action/Status</td>
+    </tr>
+  </thead>
+  <tbody>
+  <% @borrowers.each do |borrower| %>
+      <tr>
+        <td style="width: 200px;"><%= borrower.first_name %> <%= borrower.last_name %></td>
+        <td style="width: 200px;"><%= borrower.loan_reason %></td>
+        <td style="width: 200px;"><%= borrower.loan_description %></td>
+        <td style="width: 200px;"><%= borrower.ammount_needed %></td>
+        <td style="width: 200px;"><%= borrower.ammount_raised %></td>
+        <td style="width: 200px;">
+          <form action="/loans/<%= borrower.id %>" method="post">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <input type="hidden" name="loan[borrower_id]" value="<%= borrower.id %>">
+            <input type="number" name="loan[amount]" id="Loan_Amount"  style="width: 100px;">
+            <input type="submit" name="Lend" value="Lend">
+          </form>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<h3 style="color:red;">List of people you lent money to:</h3>
+<table>
+  <thead>
+    <tr>
+      <td style="width: 200px;">Name</td>
+      <td style="width: 200px;">Money Needed For</td>
+      <td style="width: 200px;">Description</td>
+      <td style="width: 200px;">Ammount Needed</td>
+      <td style="width: 200px;">Ammount Raised</td>
+      <td style="width: 200px;">Ammount Lent</td>
+    </tr>
+  </thead>
+  <tbody>
+  <% @my_loans.reverse.each do |loan| %>
+    <tr>
+      <td style="width: 200px;"><%= loan.borrower.first_name %> <%= loan.borrower.last_name %></td>
+      <td style="width: 200px;"><%= loan.borrower.loan_reason %></td>
+      <td style="width: 200px;"><%= loan.borrower.loan_description %></td>
+      <td style="width: 200px;"><%= loan.borrower.ammount_needed %></td>
+      <td style="width: 200px;"><%= loan.borrower.ammount_raised %></td>
+      <td style="width: 200px;"><%= loan.amount %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% end %>

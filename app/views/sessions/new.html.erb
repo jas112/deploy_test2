@@ -1,0 +1,19 @@
+<%= content_for :middle do %>
+<h1>Login</h1>
+<div style="color: white; font-weight: bold; background-color: red; padding-left: 5px;">
+<% if flash[:errors] %>
+	<% flash[:errors].each do |e| %>
+		<p><%= e %></p>
+	<% end %>
+<% end %>
+</div>
+<form action="/sessions" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <p>Email:</p>
+  <input type="text" name="user[email]" id="Email" placeholder="Enter Email Here">
+  <p>Password:</p>
+  <input type="text" name="user[password]" id="Password" placeholder="Enter Password Here">
+  <input type="submit" name="Login" value="Login">
+</form>
+<a href="/register">Click Here to Register</a>
+<% end %>

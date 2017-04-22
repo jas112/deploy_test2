@@ -1,0 +1,25 @@
+<%= content_for :middle do %>
+  <h4 style="margin-left:880px;"><a href="/sessions/<%= current_user.id%>" data-method="DELETE">Logout</a></h4>
+  <h4 style="font-weight: bold">Name: <%= @borrower.first_name %> <%= @borrower.last_name %></h4>
+  <h4 style="font-weight: bold">Amount Needed: $<%= @borrower.ammount_needed %></h4>
+  <h4 style="font-weight: bold">Ammount Raised: $<%= @borrower.ammount_raised %></h4>
+  <h4 style="font-weight: bold;color: blue;">List of people who lent you money:</h4>
+  <table>
+    <thead>
+      <tr>
+        <td style="width: 200px;"><h4>Name</h4></td>
+        <td style="width: 200px;"><h4>Email</h4></td>
+        <td style="width: 200px;"><h4>Ammount Lent</h4></td>
+      </tr>
+    </thead>
+    <tbody>
+    <% @borrower.loans.each do |l| %>
+      <tr>
+        <td style="width: 200px;"><%= l.lender.first_name %> <%= l.lender.last_name %></td>
+        <td style="width: 200px;"><%= l.lender.email %></td>
+        <td style="width: 200px;"><%= l.amount %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>

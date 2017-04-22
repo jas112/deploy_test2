@@ -1,0 +1,59 @@
+<%= content_for :left do %>
+<h1>Lender</h1>
+<div style="color: white; font-weight: bold; background-color: red; padding-left: 5px;">
+<% if flash[:errors] %>
+	<% flash[:errors].each do |e| %>
+		<p><%= e %></p>
+	<% end %>
+<% end %>
+</div>
+<form action="/lenders" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <p>First Name:</p>
+  <input type="text" name="lender[first_name]" id="Lender_First_Name" placeholder="Enter First Name Here">
+  <p style="margin-top: 15px;">Last Name:</p>
+  <input type="text" name="lender[last_name]" id="Lender_Last_Name" placeholder="Enter Last Name Here">
+  <p style="margin-top: 15px;">Email:</p>
+  <input type="text" name="lender[email]" id="Lender_Email" placeholder="Enter Email Here">
+  <p style="margin-top: 15px;">Password:</p>
+  <input type="password" name="lender[password]" id="Lender_Password" placeholder="Enter Password Here">
+  <p style="margin-top: 15px;">Password Confirmation:</p>
+  <input type="password" name="lender[password_confirmation]" id="Lender_Password_Confirmation" placeholder="Enter Password Confirmation Here">
+  <p style="margin-top: 15px;">Set Account Balance:</p>
+  <input type="number" name="lender[account_balance]" id="Lender_Bank_Account">
+  <input type="submit" name="Register" value="Register">
+</form>
+<a href="/">Already a Member?</a>
+<% end %>
+
+<%= content_for :right do %>
+<h1>Borrower</h1>
+<div style="color: white; font-weight: bold; background-color: red; padding-left: 5px;">
+<% if flash[:errors] %>
+	<% flash[:errors].each do |e| %>
+		<p><%= e %></p>
+	<% end %>
+<% end %>
+</div>
+<form action="/borrowers" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <p>First Name:</p>
+  <input type="text" name="borrower[first_name]" id="Borrower_First_Name" placeholder="Enter First Name Here">
+  <p style="margin-top: 15px;">Last Name:</p>
+  <input type="text" name="borrower[last_name]" id="Borrower_Last_Name" placeholder="Enter Last Name Here">
+  <p style="margin-top: 15px;">Email:</p>
+  <input type="text" name="borrower[email]" id="Borrower_Email" placeholder="Enter Email Here">
+  <p style="margin-top: 15px;">Password:</p>
+  <input type="password" name="borrower[password]" id="Borrower_Password" placeholder="Enter Password Here">
+  <p style="margin-top: 15px;">Password Confirmation:</p>
+  <input type="password" name="borrower[password_confirmation]" id="Borrower_Password_Confirmation" placeholder="Enter Password Confirmation Here">
+  <p style="margin-top: 8px;">Need Money For:</p>
+  <textarea name="borrower[loan_reason]" rows="1" cols="30"></textarea>
+  <p style="margin-top: 3px;">Description:</p>
+  <textarea name="borrower[loan_description]" rows="3" cols="30"></textarea>
+  <p style="margin-top: 3px;">Amount needed:</p>
+  <input type="number" name="borrower[ammount_needed]" id="Borrower_Ammount_Needed">
+  <input type="submit" name="Register" value="Register">
+  <a href="/">Already a Member?</a>
+</form>
+<% end %>

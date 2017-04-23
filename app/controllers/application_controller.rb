@@ -29,11 +29,11 @@ class ApplicationController < ActionController::Base
 
   def user_authorization
     if Lender.where(email: session[:user_email]).first
-      @user = Lender.where(email: session[:user_email]).first
-      redirect_to "/lender/#{@user.id}" unless current_user === @user
+      @user = Lender.find(params[:id])
+      redirect_to "/lender/#{current_user.id}" unless current_user === @user
     else
-      @user = Borrower.where(email: session[:user_email]).first
-      redirect_to "/borrower/#{@user.id}" unless current_user === @user
+      @user = Borrower.find(params[:id])
+      redirect_to "/borrower/#{current_user.id}" unless current_user === @user
     end
   end
 

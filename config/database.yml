@@ -82,5 +82,5 @@ test:
 production:
   <<: *default
   database: rb_beltex2_production
-  # username: rb_beltex2
+  username: rb_beltex2
   password: <%= ENV['RB_BELTEX2_DATABASE_PASSWORD'] %>
